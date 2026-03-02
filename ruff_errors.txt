@@ -1,0 +1,274 @@
+E701 Multiple statements on one line (colon)
+  --> src\dashboard\pages\analyst.py:58:52
+   |
+57 |     def trend_html(val, avg, is_pct=False):
+58 |         if avg == 0 or pd.isna(avg) or pd.isna(val): return ""
+   |                                                    ^
+59 |         diff = ((val - avg) / avg) * 100 if not is_pct else (val - avg)
+60 |         if diff > 0:
+   |
+
+E701 Multiple statements on one line (colon)
+   --> src\dashboard\pages\analyst.py:171:45
+    |
+170 |             for lbl, col, higher_is_better in metrics:
+171 |                 if col not in cmp_df.columns: continue
+    |                                             ^
+172 |                 vals = [cmp_df[cmp_df["name"]==p][col].iloc[0] for p in players_cmp]
+173 |                 best_val = max(vals) if higher_is_better else min(vals)
+    |
+
+E701 Multiple statements on one line (colon)
+  --> src\dashboard\pages\expert.py:51:41
+   |
+50 |                     pred_val = (base_xg * 30) + (base_g * 10) + (base_m / 200)
+51 |                     if pd.isna(pred_val): pred_val = 5.0
+   |                                         ^
+52 |                     pred_val = round(min(max(pred_val, 0), 40), 1)
+   |
+
+E722 Do not use bare `except`
+  --> src\dashboard\pages\expert.py:61:17
+   |
+59 |                         "injury_hist": -0.510
+60 |                     }
+61 |                 except:
+   |                 ^^^^^^
+62 |                     pred_val = 24.0
+63 |                     shap_vals = {"goals_p90": 0.842, "xg_p90": 0.612, "mins_played": 0.420, "age_u21": -0.288, "injury_hist": -0.510}
+   |
+
+E722 Do not use bare `except`
+  --> src\dashboard\pages\fan.py:49:5
+   |
+47 |             if Path(processed_matches_path).exists():
+48 |                 fixtures_df = pl.read_parquet(processed_matches_path).to_pandas()
+49 |     except:
+   |     ^^^^^^
+50 |         pass
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\dashboard\pages\player_profile.py:36:26
+   |
+34 |     # 1. Header (Photo, Name, Badges, Base stats)
+35 |     photo_url = latest.get("photo_url", "https://media.api-sports.io/football/players/145417.png")
+36 |     if pd.isna(photo_url): photo_url = "https://media.api-sports.io/football/players/145417.png"
+   |                          ^
+37 |     pos = str(latest.get("position", "MIDFIELDER")).upper()
+38 |     age = latest.get("age", 25)
+   |
+
+E701 Multiple statements on one line (colon)
+   --> src\dashboard\pages\player_profile.py:148:39
+    |
+146 |                     color = "#F0F0F0"
+147 |                     if len(valid_vs) > 1:
+148 |                         if v == best_v: color = "#00FF6A"
+    |                                       ^
+149 |                         elif v == worst_v: color = "#FF4444"
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\dashboard\pages\player_profile.py:149:42
+    |
+147 | …     if len(valid_vs) > 1:
+148 | …         if v == best_v: color = "#00FF6A"
+149 | …         elif v == worst_v: color = "#FF4444"
+    |                            ^
+150 | …         
+151 | …     html += f"<td style='text-align:right; padding:12px 0; border-top:1px solid #333; color:{color}; font-weight:bold;'>{fmt.format…
+    |
+
+F821 Undefined name `np`
+   --> src\dashboard\pages\player_profile.py:221:9
+    |
+220 |         # Scatter shots
+221 |         np.random.seed(len(player_name))
+    |         ^^
+222 |         shot_x = np.random.uniform(90, 115, 12)
+223 |         shot_y = np.random.uniform(25, 55, 12)
+    |
+
+F821 Undefined name `np`
+   --> src\dashboard\pages\player_profile.py:222:18
+    |
+220 |         # Scatter shots
+221 |         np.random.seed(len(player_name))
+222 |         shot_x = np.random.uniform(90, 115, 12)
+    |                  ^^
+223 |         shot_y = np.random.uniform(25, 55, 12)
+224 |         is_goal = np.random.choice([True, False], size=12, p=[0.3, 0.7])
+    |
+
+F821 Undefined name `np`
+   --> src\dashboard\pages\player_profile.py:223:18
+    |
+221 |         np.random.seed(len(player_name))
+222 |         shot_x = np.random.uniform(90, 115, 12)
+223 |         shot_y = np.random.uniform(25, 55, 12)
+    |                  ^^
+224 |         is_goal = np.random.choice([True, False], size=12, p=[0.3, 0.7])
+    |
+
+F821 Undefined name `np`
+   --> src\dashboard\pages\player_profile.py:224:19
+    |
+222 |         shot_x = np.random.uniform(90, 115, 12)
+223 |         shot_y = np.random.uniform(25, 55, 12)
+224 |         is_goal = np.random.choice([True, False], size=12, p=[0.3, 0.7])
+    |                   ^^
+225 |         
+226 |         for x, y, g in zip(shot_x, shot_y, is_goal):
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\dashboard\pages\player_profile.py:231:20
+    |
+229 | …     glow = go.Scatter(x=[x], y=[y], mode='markers', marker=dict(size=sz*2, color=clr.replace("0.8", "0.2")), hoverinfo='skip') if g…
+230 | …     m = go.Scatter(x=[x], y=[y], mode='markers', marker=dict(size=sz, color=clr, line=dict(width=1, color="#111")), showlegend=Fals…
+231 | …     if glow: fig_p.add_trace(glow)
+    |              ^
+232 | …     fig_p.add_trace(m)
+    |
+
+F821 Undefined name `np`
+   --> src\dashboard\pages\player_profile.py:259:24
+    |
+257 |         import scipy.interpolate as interp
+258 |         if len(szns) > 1:
+259 |             x_smooth = np.linspace(min(szns), max(szns), 30)
+    |                        ^^
+260 |             f = interp.interp1d(szns, y_g, kind='quadratic' if len(szns)>2 else 'linear')
+261 |             y_smooth = f(x_smooth)
+    |
+
+E702 Multiple statements on one line (semicolon)
+  --> src\ingestion\api_football.py:9:38
+   |
+ 7 | load_dotenv()
+ 8 |
+ 9 | _KEY  = os.getenv("API_FOOTBALL_KEY");  assert _KEY,  "API_FOOTBALL_KEY missing"
+   |                                      ^
+10 | _HOST = os.getenv("API_FOOTBALL_HOST"); assert _HOST, "API_FOOTBALL_HOST missing"
+11 | HEADERS  = {"x-rapidapi-key": _KEY, "x-rapidapi-host": _HOST}
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> src\ingestion\api_football.py:10:39
+   |
+ 9 | _KEY  = os.getenv("API_FOOTBALL_KEY");  assert _KEY,  "API_FOOTBALL_KEY missing"
+10 | _HOST = os.getenv("API_FOOTBALL_HOST"); assert _HOST, "API_FOOTBALL_HOST missing"
+   |                                       ^
+11 | HEADERS  = {"x-rapidapi-key": _KEY, "x-rapidapi-host": _HOST}
+12 | BASE_URL = "https://v3.football.api-sports.io"
+   |
+
+E741 Ambiguous variable name: `l`
+  --> src\ingestion\statsbomb.py:81:47
+   |
+80 |     # Extrair coordenadas de location (lista [x, y])
+81 |     df["x"]     = df["location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+   |                                               ^
+82 |     df["y"]     = df["location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+83 |     df["end_x"] = df["shot_end_location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+   |
+
+E741 Ambiguous variable name: `l`
+  --> src\ingestion\statsbomb.py:82:47
+   |
+80 |     # Extrair coordenadas de location (lista [x, y])
+81 |     df["x"]     = df["location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+82 |     df["y"]     = df["location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+   |                                               ^
+83 |     df["end_x"] = df["shot_end_location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+84 |     df["end_y"] = df["shot_end_location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+   |
+
+E741 Ambiguous variable name: `l`
+  --> src\ingestion\statsbomb.py:83:56
+   |
+81 |     df["x"]     = df["location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+82 |     df["y"]     = df["location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+83 |     df["end_x"] = df["shot_end_location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+   |                                                        ^
+84 |     df["end_y"] = df["shot_end_location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+   |
+
+E741 Ambiguous variable name: `l`
+  --> src\ingestion\statsbomb.py:84:56
+   |
+82 |     df["y"]     = df["location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+83 |     df["end_x"] = df["shot_end_location"].apply(lambda l: l[0] if isinstance(l, list) else None)
+84 |     df["end_y"] = df["shot_end_location"].apply(lambda l: l[1] if isinstance(l, list) else None)
+   |                                                        ^
+85 |
+86 |     # Features de xG (inspirado em Soccermatics)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\ml\lineup_optimizer.py:30:25
+   |
+28 |         pos = row.get("position", "")
+29 |         # Normaliza posições
+30 |         if "Goal" in pos: cat = "GK"
+   |                         ^
+31 |         elif "Defen" in pos: cat = "DF"
+32 |         elif "Midfi" in pos: cat = "MF"
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\ml\lineup_optimizer.py:31:28
+   |
+29 |         # Normaliza posições
+30 |         if "Goal" in pos: cat = "GK"
+31 |         elif "Defen" in pos: cat = "DF"
+   |                            ^
+32 |         elif "Midfi" in pos: cat = "MF"
+33 |         elif "Attack" in pos: cat = "FW"
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\ml\lineup_optimizer.py:32:28
+   |
+30 |         if "Goal" in pos: cat = "GK"
+31 |         elif "Defen" in pos: cat = "DF"
+32 |         elif "Midfi" in pos: cat = "MF"
+   |                            ^
+33 |         elif "Attack" in pos: cat = "FW"
+34 |         else: cat = "MF"  # fallback
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\ml\lineup_optimizer.py:33:29
+   |
+31 |         elif "Defen" in pos: cat = "DF"
+32 |         elif "Midfi" in pos: cat = "MF"
+33 |         elif "Attack" in pos: cat = "FW"
+   |                             ^
+34 |         else: cat = "MF"  # fallback
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\ml\lineup_optimizer.py:34:13
+   |
+32 |         elif "Midfi" in pos: cat = "MF"
+33 |         elif "Attack" in pos: cat = "FW"
+34 |         else: cat = "MF"  # fallback
+   |             ^
+35 |         
+36 |         minutes = row.get("minutes_played", 0)
+   |
+
+E741 Ambiguous variable name: `l`
+  --> src\transform\players.py:24:9
+   |
+22 |             stats.get("duels", {}),
+23 |         )
+24 |         l = stats.get("league", {})
+   |         ^
+25 |         rows.append({
+26 |             "player_id":          p.get("id"),
+   |
+
+Found 26 errors.

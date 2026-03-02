@@ -1,0 +1,42 @@
+name: CI + Daily ELT
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 8 * * *"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install uv
+      - run: uv pip install -r requirements-dev.txt --system
+      - run: uv run ruff check src/ tests/
+      - run: uv run black --check src/ tests/
+      - run: uv run pytest tests/ -v --cov=src --cov-fail-under=70
+  elt:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install uv
+      - run: uv pip install -r requirements.txt --system
+      - name: Run ELT
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          API_FOOTBALL_HOST: ${{ secrets.API_FOOTBALL_HOST }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          PALMEIRAS_TEAM_ID: "121"
+          SEASON: "2025"
+          LEAGUE_ID: "71"
+        run: uv run python -m orchestration.flows.daily_elt

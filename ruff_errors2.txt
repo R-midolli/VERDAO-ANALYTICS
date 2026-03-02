@@ -1,0 +1,36 @@
+F841 Local variable `lg` is assigned to but never used
+  --> src\transform\players.py:24:9
+   |
+22 |             stats.get("duels", {}),
+23 |         )
+24 |         lg = stats.get("league", {})
+   |         ^^
+25 |         rows.append({
+26 |             "player_id":          p.get("id"),
+   |
+help: Remove assignment to unused variable `lg`
+
+F821 Undefined name `l`
+  --> src\transform\players.py:28:35
+   |
+26 |             "player_id":          p.get("id"),
+27 |             "season":             query_season,
+28 |             "league_id":          l.get("id"),
+   |                                   ^
+29 |             "league_name":        l.get("name"),
+30 |             "name":               p.get("name", ""),
+   |
+
+F821 Undefined name `l`
+  --> src\transform\players.py:29:35
+   |
+27 |             "season":             query_season,
+28 |             "league_id":          l.get("id"),
+29 |             "league_name":        l.get("name"),
+   |                                   ^
+30 |             "name":               p.get("name", ""),
+31 |             "age":                p.get("age") or 0,
+   |
+
+Found 3 errors.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).
