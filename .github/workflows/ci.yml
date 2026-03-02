@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install uv
-      - run: uv pip install -r requirements-dev.txt --system
+      - run: uv pip install -r requirements-full.txt --system
       - run: uv run ruff check src/ tests/
       - run: uv run black --check src/ tests/
       - run: uv run pytest tests/ -v --cov=src --cov-fail-under=70

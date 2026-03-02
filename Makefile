@@ -17,7 +17,7 @@ help:
 setup:
 	pip install uv
 	uv venv
-	uv pip install -r requirements-dev.txt
+	uv pip install -r requirements-full.txt
 	@echo "✅ Setup done. Run: source .venv/Scripts/activate"
 
 data:
