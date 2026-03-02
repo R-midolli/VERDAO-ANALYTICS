@@ -2,8 +2,14 @@
 Verdão Analytics — Multi-page Streamlit App
 3 camadas: Fan | Analyst | Expert
 """
+import sys
+from pathlib import Path
 import streamlit as st
 
+# Add project root to sys.path so 'src' module can be resolved on Streamlit Cloud
+root_dir = Path(__file__).resolve().parent.parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.append(str(root_dir))
 st.set_page_config(
     page_title="🌿 Verdão Analytics",
     page_icon="🌿",
